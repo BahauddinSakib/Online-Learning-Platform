@@ -27,6 +27,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 //import { useRouter } from 'next/router';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 function AddNewCourseDialog({children}){
 
@@ -62,6 +63,11 @@ function AddNewCourseDialog({children}){
        courseId: courseId
     });
     console.log(result.data);
+    if(result.data.resp=='limit exceed')
+    {
+      toast.warning('Please subscribe to plan')
+       router.push('/workspace/billing');
+    }
     setLoading(false)
     router.push('/workspace/edit-course/'+result.data?.courseId);
   }

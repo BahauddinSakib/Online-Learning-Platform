@@ -14,6 +14,7 @@ function ChapterListSidebar({courseInfo}) {
     //const courseContent = courseInfo?.course?.courseContent
     const courseContent = courseInfo?.[0]?.course?.courseContent;
     const {SelectedChapterIndex,setSelectedChapterIndex} = useContext(SelectedChapterIndexContent)
+    let completedChapter = enrollCourse?.completedChapter ?? []
 
     //const courseContent = courseInfo?.courseContent;
     
@@ -28,11 +29,17 @@ function ChapterListSidebar({courseInfo}) {
     <AccordionContent>
       
       <div className=''>
-        {chapter?.courseData?.topics.map((topic,index)=>(
+        {chapter?.courseData?.topics.map((topic,index_)=>(
             
-                <h2 key={index} className='p-3 bg-white my-1 rounded-lg'> 
-                    {topic?.topic}
-                </h2>
+            <h2 
+            key={index_} 
+            className={`p-3 my-1 rounded-lg ${
+              enrollCourse?.completedChapters?.includes(index) ? 'bg-green-100' : 'bg-white'
+            }`}
+          >
+            {topic?.topic}
+          </h2>
+          
             )
         )}
       </div>
@@ -49,6 +56,3 @@ function ChapterListSidebar({courseInfo}) {
 
 export default ChapterListSidebar
 
-//{chapter.courseData.topics?.map((topic, idx) => (
-    //<div key={idx}>{topic.topic}</div>
-//))}

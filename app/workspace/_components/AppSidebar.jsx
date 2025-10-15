@@ -37,7 +37,7 @@ const SideBarOptions = [
   {
     title: "My Learning",
     icon: Book,
-    path: "/workspace/my-courses",
+    path: "/workspace/my-learning",
   },
   {
     title: "Explore Courses",
@@ -45,14 +45,9 @@ const SideBarOptions = [
     path: "/workspace/explore",
   },
   {
-    title: "AI Tools",
-    icon: PencilRulerIcon,
-    path: "/workspace/ai-tools",
-  },
-  {
     title: "Billing",
     icon: WalletCards,
-    path: "/workspace/profile",
+    path: "/workspace/billing",
   },
   {
     title: "Profile",
@@ -67,9 +62,13 @@ function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarHeader className="p-4">
-        <img src="/logo.svg" alt="logo" width={130} height={120} />
-      </SidebarHeader>
+     <SidebarHeader className="p-4 flex items-center gap-3">
+      <img src="/Logo.png" alt="logo" width={50} height={50} />
+      <span className="text-lg font-bold text-blue-500">
+       Online Learning Platform
+     </span>
+     </SidebarHeader>
+
 
       <SidebarContent className={'s-y-2'}>
         <SidebarGroup className={'pb-0.5'}/>

@@ -4,6 +4,7 @@ import axios from "axios";
 import { coursesTable } from "@/config/schema";
 import { db } from "@/config/db";
 import { eq } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/dist/types/server";
 
 const PROMPT = `Depends on Chapter name and Topic Generate content for each topic in HTML 
 and give response in JSON format. 
@@ -21,6 +22,9 @@ content:<>
 export async function POST(req){
     const { courseJson, courseTitle, courseId } = await req.json();
 
+    const {has} = await auth()
+    const hasPremiumAccess = has ({plan:'starter'})
+
     const promises = courseJson?.chapters?.map(async (chapter) => {
         const config = {
           responseMimeType: "text/plain",
@@ -36,6 +40,16 @@ export async function POST(req){
             ],
           },
         ];
+
+        //if use already created course
+        if(!hasPremiumAccess){
+            const result = await db.select().from(coursesTable)
+            .where(eq(coursesTable.userEmail,user?.primaryEmailAddress.emailAddress));
+
+            if(result?.length>=1){ //can not create more than 1 course
+               return NextResponse.json({'resp': 'limit exceed'});
+            }
+        }
         
           const response = await ai.models.generateContent({
         model,
