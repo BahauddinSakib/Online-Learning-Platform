@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Image Alt](https://github.com/BahauddinSakib/EMovie_Ticket/blob/main/Emovie1.png)
 
 ## Getting Started
 
